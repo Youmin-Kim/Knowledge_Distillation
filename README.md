@@ -58,7 +58,7 @@ python3 ./train.py \
 --tn 1 \
 ```
 ### Start Distillation
-- Hyperparamters for each distillation methods is fixed to same values on each original paper
+- Hyperparamters for each distillation method are fixed to same values on each original paper
 - ex) dataset : cifar100, teacher network : wideresnet16_4, teacher index : 1,  student network : resnet32, student index : 1, index of the number of distillations: 1
 ```
 python3 ./distill.py \
