@@ -43,32 +43,32 @@ This repository intergrated various Knowledge Distillation methods. This impleme
 - ex) dataset : cifar100, model: resnet32, index of the number of trainings: 1
 ```
 python3 ./train.py \
---type cifar100 \
---model resnet \
---depth 32 \
---tn 1 \
+ --type cifar100 \
+ --model resnet \
+ --depth 32 \
+ --tn 1 \
 ```
 - ex) dataset : cifar100, model: wideresnet16_4, index of the number of trainings: 1
 ```
 python3 ./train.py \
---type cifar100 \
---model wideresnet \
---depth 16 \
---wfactor 4 \
---tn 1 \
+ --type cifar100 \
+ --model wideresnet \
+ --depth 16 \
+ --wfactor 4 \
+ --tn 1 \
 ```
 ### Start Distillation
 - Hyperparamters for each distillation method are fixed to same values on each original paper
 - ex) dataset : cifar100, teacher network : wideresnet16_4, teacher index : 1,  student network : resnet32, student index : 1, index of the number of distillations: 1
 ```
 python3 ./distill.py \
---type cifar100 \
---teacher wideresnet \
---student resnet \
---depth 16 \
---wfactor 4 \
---tn 1 \
---sdepth 32 \
---stn 1 \
---distype KD
+ --type cifar100 \
+ --teacher wideresnet \
+ --student resnet \
+ --depth 16 \
+ --wfactor 4 \
+ --tn 1 \
+ --sdepth 32 \
+ --stn 1 \
+ --distype KD
 ```
