@@ -2,7 +2,7 @@
 
 This repository intergrated various Knowledge Distillation methods. This implementation is based on these repositories:
 
-- [PyTorch ImageNet Example](https://github.com/pytorch/examples/tree/master/imagenet)
+- [PyTorch Cifar Models](https://github.com/junyuseu/pytorch-cifar-models)
 - [https://github.com/szagoruyko/attention-transfer](https://github.com/szagoruyko/attention-transfer)
 - [https://github.com/lenscloth/RKD](https://github.com/lenscloth/RKD)
 - [https://github.com/clovaai/overhaul-distillation](https://github.com/clovaai/overhaul-distillation)
