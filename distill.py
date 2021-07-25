@@ -183,7 +183,8 @@ def main():
 
     # check the performance of the pre-trained teacher
     print("check the performance of the pre-trained teacher")
-    test(val_loader, teacher, criterion)
+    t1, t5, _ = test(val_loader, teacher, criterion)
+    print("pre-trained teacher (top1, top5) : ", t1, t5)
 
     # add the additional weights for some distillation methods
     if args.distype == 'FN':
@@ -384,9 +385,6 @@ def distillation(train_loader, teacher, student, criterion, optimizer, epoch, re
                 epoch, i, len(train_loader), batch_time=batch_time,
                 data_time=data_time, loss=losses, top1=top1, top5=top5))
 
-        print(' * Prec@1 {top1.avg:.3f} Prec@5 {top5.avg:.3f}'
-              .format(top1=top1, top5=top5))
-
     return top1.avg, top5.avg, ce_losses, dis_losses
 
 
@@ -425,9 +423,6 @@ def test(val_loader, model, criterion):
                   'Prec@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
                 i, len(val_loader), batch_time=batch_time, loss=losses,
                 top1=top1, top5=top5))
-
-    print(' * Prec@1 {top1.avg:.3f} Prec@5 {top5.avg:.3f}'
-          .format(top1=top1, top5=top5))
 
     return top1.avg, top5.avg, losses
 
