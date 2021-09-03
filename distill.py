@@ -44,15 +44,11 @@ parser.add_argument('--student', default='', type=str, help='to be trained stude
 # for teacher
 # for all resnet
 parser.add_argument('--depth', type=int, default=0, help='depth for resnet, wideresnet')
-# for wideresnet
-parser.add_argument('--wfactor', type=int, default=1, help='wide factor for wideresnet')
 # index of each training runs
 parser.add_argument('--tn', type=str, default='', help='n-th training')
 # for student
 # for all resnet
 parser.add_argument('--sdepth', type=int, default=0, help='depth for resnet, wideresnet')
-# for wideresnet
-parser.add_argument('--swfactor', type=int, default=1, help='wide factor for wideresnet')
 # index of each training runs
 parser.add_argument('--stn', type=str, default='', help='n-th training')
 # distillation method for training student
@@ -130,13 +126,6 @@ def main():
             print("Inappropriate ResNet Teacher model")
             return
         teacher_name = args.teacher+str(args.depth)
-    elif args.teacher == 'wideresnet':
-        print('WideResNet CIFAR10, CIFAR100 : 40_1(0.6M), 40_2(2.2M), 40_4(8.9M), 40_8(35.7M), 28_10(36.5M), 28_12(52.5M),'
-            ' 22_8(17.2M), 22_10(26.8M), 16_8(11.0M), 16_10(17.1M)')
-        assert (args.depth - 4) % 6 == 0
-        n = int((args.depth - 4) / 6)
-        teacher = Wide_ResNet_Cifar(BB, [n, n, n], wfactor=args.wfactor, num_classes=class_num)
-        teacher_name = args.teacher+str(args.depth)+'_'+str(args.wfactor)
     else:
         print("No Teacher model")
         return
@@ -155,13 +144,6 @@ def main():
             print("Inappropriate ResNet Student model")
             return
         student_name = args.student + str(args.sdepth) + student_name + teacher_name + '_' + str(args.tn) + 'th'
-    elif args.student == 'wideresnet':
-        print('WideResNet CIFAR10, CIFAR100 : 40_1(0.6M), 40_2(2.2M), 40_4(8.9M), 40_8(35.7M), 28_10(36.5M), 28_12(52.5M),'
-            ' 22_8(17.2M), 22_10(26.8M), 16_8(11.0M), 16_10(17.1M)')
-        assert (args.sdepth - 4) % 6 == 0
-        n = int((args.sdepth - 4) / 6)
-        student = Wide_ResNet_Cifar(BB, [n, n, n], wfactor=args.swfactor, num_classes=class_num)
-        student_name = args.student + str(args.sdepth) + '_' + str(args.swfactor) + student_name + teacher_name + '_' + str(args.tn) + 'th'
     else:
         print("No Student model")
         return
@@ -576,7 +558,7 @@ def accuracy(output, target, topk=(1,)):
 
     res = []
     for k in topk:
-        correct_k = correct[:k].view(-1).float().sum(0)
+        correct_k = correct[:k].reshape(-1).float().sum(0)
         res.append(correct_k.mul_(100.0 / batch_size))
     return res
 
