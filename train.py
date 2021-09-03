@@ -41,8 +41,6 @@ parser.add_argument('--type', default='', type=str, help='choose dataset (cifar1
 parser.add_argument('--model', default='', type=str, help='choose model type (resnet, wideresnet)')
 # for resnet, wideresnet
 parser.add_argument('--depth', type=int, default=0, help='model depth for resnet, wideresnet')
-# for wideresnet
-parser.add_argument('--wfactor', type=int, default=0, help='wide factor for wideresnet')
 # index of each training runs
 parser.add_argument('--tn', type=str, default='', help='n-th training')
 parser.add_argument('--seed', type=int, default=0, help='random seed (default: 0)')
@@ -112,13 +110,6 @@ def main():
             print("Inappropriate ResNet model")
             return
         model_name = args.model+str(args.depth)
-    elif args.model == 'wideresnet':
-        print('WideResNet CIFAR10, CIFAR100 : 40_1(0.6M), 40_2(2.2M), 40_4(8.9M), 40_8(35.7M), 28_10(36.5M), 28_12(52.5M),'
-              ' 22_8(17.2M), 22_10(26.8M), 16_8(11.0M), 16_10(17.1M)')
-        assert (args.depth - 4) % 6 == 0
-        n = int((args.depth - 4) / 6)
-        model = Wide_ResNet_Cifar(BasicBlock, [n, n, n], wfactor=args.wfactor, num_classes=class_num)
-        model_name = args.model + str(args.depth) + '_' + str(args.wfactor)
     else:
         print("No model")
         return
