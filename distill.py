@@ -39,16 +39,16 @@ parser.add_argument('--print-freq', '-p', default=100, type=int,
 parser.add_argument('--test', default='', type=str, metavar='PATH',
                     help='path to trained model (default: none)')
 parser.add_argument('--type', default='', type=str, help='choose dataset cifar10, cifar100, imagenet')
-parser.add_argument('--teacher', default='', type=str, help='pre-trained teacher network type (resnet, wideresnet)')
-parser.add_argument('--student', default='', type=str, help='to be trained student network type (resnet, wideresnet)')
+parser.add_argument('--teacher', default='', type=str, help='pre-trained teacher network type (resnet)')
+parser.add_argument('--student', default='', type=str, help='to be trained student network type (resnet)')
 # for teacher
 # for all resnet
-parser.add_argument('--depth', type=int, default=0, help='depth for resnet, wideresnet')
+parser.add_argument('--depth', type=int, default=0, help='depth for resnet')
 # index of each training runs
 parser.add_argument('--tn', type=str, default='', help='n-th training')
 # for student
 # for all resnet
-parser.add_argument('--sdepth', type=int, default=0, help='depth for resnet, wideresnet')
+parser.add_argument('--sdepth', type=int, default=0, help='depth for resnet')
 # index of each training runs
 parser.add_argument('--stn', type=str, default='', help='n-th training')
 # distillation method for training student
@@ -132,8 +132,7 @@ def main():
 
     # create student
     if args.student == 'resnet':
-        print('ResNet CIFAR10, CIFAR100 : 20(0.27M) 32(0.46M), 44(0.66M), 56(0.85M), 110(1.7M)\n'
-              'ImageNet 18(11.68M), 34(21.79M), 50(25.5M)')
+        print('ResNet CIFAR10, CIFAR100 : 20(0.27M) 32(0.46M), 44(0.66M), 56(0.85M), 110(1.7M)')
         cifar_list = [20, 32, 44, 56, 110]
         # CIFAR10, CIFAR100
         if args.sdepth in cifar_list:
