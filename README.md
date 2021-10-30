@@ -42,24 +42,12 @@ This repository intergrated various Knowledge Distillation methods. This impleme
 ### Baseline Training for teacher network or baseline student 
 - ex) dataset : cifar100, model: resnet110, index of the number of trainings: 1
 ```
-python3 ./train.py \
- --type cifar100 \
- --model resnet \
- --depth 110 \
- --tn 1 \
+python3 ./train.py --type cifar100 --model resnet --depth 110 --tn 1
 ```
 
 ### Start Distillation
 - Hyperparamters for each distillation method are fixed to same values on each original paper
 - ex) dataset : cifar100, teacher network : resnet110, teacher index : 1,  student network : resnet20, student index : 1, index of the number of distillations: 1
 ```
-python3 ./distill.py \
- --type cifar100 \
- --teacher resnet \
- --student resnet \
- --depth 110 \
- --tn 1 \
- --sdepth 20 \
- --stn 1 \
- --distype KD
+python3 ./distill.py --type cifar100 --teacher resnet --student resnet --depth 110 --tn 1 --sdepth 20 --stn 1 --distype KD
 ```
