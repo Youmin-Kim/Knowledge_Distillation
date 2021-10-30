@@ -37,10 +37,10 @@ parser.add_argument('--print-freq', '-p', default=100, type=int,
                     metavar='N', help='print frequency (default: 10)')
 parser.add_argument('--test', default='', type=str, metavar='PATH',
                     help='path to pre-trained model (default: none)')
-parser.add_argument('--type', default='', type=str, help='choose dataset (cifar10, cifar100, imagenet)')
-parser.add_argument('--model', default='', type=str, help='choose model type (resnet, wideresnet)')
+parser.add_argument('--type', default='', type=str, help='choose dataset (cifar10, cifar100)')
+parser.add_argument('--model', default='', type=str, help='choose model type (resnet)')
 # for resnet, wideresnet
-parser.add_argument('--depth', type=int, default=0, help='model depth for resnet, wideresnet')
+parser.add_argument('--depth', type=int, default=0, help='model depth for resnet')
 # index of each training runs
 parser.add_argument('--tn', type=str, default='', help='n-th training')
 parser.add_argument('--seed', type=int, default=0, help='random seed (default: 0)')
@@ -100,8 +100,7 @@ def main():
     # create model
     if args.model == 'resnet':
         cifar_list = [20, 32, 44, 56, 110]
-        print('ResNet CIFAR10, CIFAR100 : 20(0.27M) 32(0.46M), 44(0.66M), 56(0.85M), 110(1.7M)\n'
-              'ImageNet 18(11.68M), 34(21.79M), 50(25.5M)')
+        print('ResNet CIFAR10, CIFAR100 : 20(0.27M) 32(0.46M), 44(0.66M), 56(0.85M), 110(1.7M)')
         if args.depth in cifar_list:
             assert (args.depth - 2) % 6 == 0
             n = int((args.depth - 2) / 6)
